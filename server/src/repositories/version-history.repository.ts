@@ -20,7 +20,7 @@ export class VersionHistoryRepository implements IVersionHistoryRepository {
     return this.db.selectFrom('version_history').selectAll().orderBy('createdAt', 'desc').executeTakeFirst();
   }
 
-  @GenerateSql({ params: [DummyValue.STRING] })
+  @GenerateSql({ params: [{ version: DummyValue.STRING }] })
   create(version: Omit<VersionHistoryEntity, 'id' | 'createdAt'>): Promise<VersionHistoryEntity> {
     return this.db.insertInto('version_history').values(version).returningAll().executeTakeFirstOrThrow();
   }
