@@ -87,7 +87,7 @@ describe(LibraryService.name, () => {
         Promise.resolve(
           [libraryStub.externalLibraryWithImportPaths1, libraryStub.externalLibraryWithImportPaths2].find(
             (library) => library.id === id,
-          ) || null,
+          ),
         ),
       );
 
@@ -190,8 +190,6 @@ describe(LibraryService.name, () => {
     });
 
     it("should fail when library can't be found", async () => {
-      libraryMock.get.mockResolvedValue(null);
-
       await expect(sut.handleQueueSyncFiles({ id: libraryStub.externalLibrary1.id })).resolves.toBe(JobStatus.SKIPPED);
     });
 
@@ -242,8 +240,6 @@ describe(LibraryService.name, () => {
     });
 
     it("should fail when library can't be found", async () => {
-      libraryMock.get.mockResolvedValue(null);
-
       await expect(sut.handleQueueSyncAssets({ id: libraryStub.externalLibrary1.id })).resolves.toBe(JobStatus.SKIPPED);
     });
   });
@@ -630,7 +626,6 @@ describe(LibraryService.name, () => {
     });
 
     it('should throw an error when a library is not found', async () => {
-      libraryMock.get.mockResolvedValue(null);
       await expect(sut.get(libraryStub.externalLibrary1.id)).rejects.toBeInstanceOf(BadRequestException);
       expect(libraryMock.get).toHaveBeenCalledWith(libraryStub.externalLibrary1.id);
     });
@@ -1015,7 +1010,7 @@ describe(LibraryService.name, () => {
         Promise.resolve(
           [libraryStub.externalLibraryWithImportPaths1, libraryStub.externalLibraryWithImportPaths2].find(
             (library) => library.id === id,
-          ) || null,
+          ),
         ),
       );
 
